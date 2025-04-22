@@ -58,10 +58,18 @@ const todoList = () => {
     // as per the format given above.
     statement = [];
     list.forEach((element) => {
-      if (element.completed === true) {
-        statement.push("[x] " + element.title);
+      if (element.dueDate === today) {
+        if (element.completed === true) {
+          statement.push("[x] " + element.title);
+        } else {
+          statement.push("[ ] " + element.title);
+        }
       } else {
-        statement.push("[ ] " + element.title);
+        if (element.completed === true) {
+          statement.push("[x] " + element.title + " " + element.dueDate);
+        } else {
+          statement.push("[ ] " + element.title + " " + element.dueDate);
+        }
       }
     });
     return statement.join("\n");
