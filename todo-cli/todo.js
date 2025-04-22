@@ -56,13 +56,15 @@ const todoList = () => {
   const toDisplayableList = (list) => {
     // Format the To-Do list here, and return the output string
     // as per the format given above.
+    statement = [];
     list.forEach((element) => {
       if (element.completed === true) {
-        console.log("[x] " + element.title);
+        statement.push("[x] " + element.title);
       } else {
-        console.log("[ ] " + element.title);
+        statement.push("[ ] " + element.title);
       }
     });
+    return statement.join("\n");
   };
 
   return {
