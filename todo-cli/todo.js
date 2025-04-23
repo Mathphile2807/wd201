@@ -1,13 +1,3 @@
-// [ ] Submit assignment 2022-07-21
-
-// Due Today
-// [x] Pay rent
-// [ ] Service vehicle
-
-// Due Later
-// [ ] File taxes 2022-07-23
-// [ ] Pay electric bill 2022-07-23
-
 const todoList = () => {
   all = [];
   const add = (todoItem) => {
@@ -18,8 +8,6 @@ const todoList = () => {
   };
 
   const overdue = () => {
-    // Write the date check condition here and return the array
-    // of overdue items accordingly.
     dueList = [];
     all.forEach((element) => {
       if (element.dueDate < today) {
@@ -30,8 +18,6 @@ const todoList = () => {
   };
 
   const dueToday = () => {
-    // Write the date check condition here and return the array
-    // of todo items that are due today accordingly.
     dueList = [];
     all.forEach((element) => {
       if (element.dueDate === today) {
@@ -42,8 +28,6 @@ const todoList = () => {
   };
 
   const dueLater = () => {
-    // Write the date check condition here and return the array
-    // of todo items that are due later accordingly.
     dueList = [];
     all.forEach((element) => {
       if (element.dueDate > today) {
@@ -54,8 +38,6 @@ const todoList = () => {
   };
 
   const toDisplayableList = (list) => {
-    // Format the To-Do list here, and return the output string
-    // as per the format given above.
     statement = [];
     list.forEach((element) => {
       if (element.dueDate === today) {
@@ -130,3 +112,5 @@ let itemsDueLater = todos.dueLater();
 let formattedItemsDueLater = todos.toDisplayableList(itemsDueLater);
 console.log(formattedItemsDueLater);
 console.log("\n\n");
+
+module.exports = todoList;
