@@ -1,5 +1,6 @@
-/* eslint-disable */
+/* eslint-disable no-undef */
 const todoList = require("../todo");
+const db = require("../models");
 
 const { all, markAsComplete, add, overdue, dueLater, dueToday } = todoList();
 
@@ -66,6 +67,23 @@ describe("TodoList text Suite", () => {
       dueDate: tomorrow,
     });
     expect(dueLater(all).length).toBe(dueLaterCount + 1);
+  });
+});
+
+describe("Todolist Test Suite", () => {
+  beforeAll(async () => {
+    await db.sequelize.sync({ force: true });
+  });
+
+  test("Should add new todo", async () => {
+    const todoItemsCount = await db.Todo.count();
+    await db.Todo.addTask({
+      title: "Test todo",
+      completed: false,
+      dueDate: new Date(),
+    });
+    const newTodoItemsCount = await db.Todo.count();
+    expect(newTodoItemsCount).toBe(todoItemsCount + 1);
   });
 });
 
