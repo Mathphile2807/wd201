@@ -58,7 +58,6 @@ module.exports = (sequelize, DataTypes) => {
             dueDate: {
               [Op.lt]: today,
             },
-            completed: false,
           },
         });
         return todos;
@@ -117,8 +116,9 @@ module.exports = (sequelize, DataTypes) => {
 
     displayableString() {
       let checkbox = this.completed ? "[x]" : "[ ]";
-      let date = this.dueDate !== today ? this.dueDate : "";
-      return `${this.id}. ${checkbox} ${this.title} ${date}`;
+      if (this.dueDate !== today)
+        return `${this.id}. ${checkbox} ${this.title} ${this.dueDate}`;
+      else return `${this.id}. ${checkbox} ${this.title}`;
     }
   }
   Todo.init(
