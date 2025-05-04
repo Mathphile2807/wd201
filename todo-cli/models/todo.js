@@ -24,17 +24,30 @@ module.exports = (sequelize, DataTypes) => {
 
       console.log("Overdue");
       // FILL IN HERE
-      await this.overdue();
+      const overdueList = await this.overdue();
+
+      console.log(
+        overdueList.map((todo) => todo.displayableString()).join("\n"),
+      );
       console.log("\n");
 
       console.log("Due Today");
       // FILL IN HERE
-      await this.dueToday();
+      const dueTodayList = await this.dueToday();
+
+      console.log(
+        dueTodayList.map((todo) => todo.displayableString()).join("\n"),
+      );
       console.log("\n");
 
       console.log("Due Later");
       // FILL IN HERE
-      await this.dueLater();
+      const dueLaterList = await this.dueLater();
+
+      console.log(
+        dueLaterList.map((todo) => todo.displayableString()).join("\n"),
+      );
+      console.log("\n");
     }
 
     static async overdue() {
@@ -48,10 +61,7 @@ module.exports = (sequelize, DataTypes) => {
             completed: false,
           },
         });
-        const todoList = todos
-          .map((todo) => todo.displayableString())
-          .join("\n");
-        console.log(todoList);
+        return todos;
       } catch (error) {
         console.error(error);
       }
@@ -67,10 +77,7 @@ module.exports = (sequelize, DataTypes) => {
             },
           },
         });
-        const todoList = todos
-          .map((todo) => todo.displayableString())
-          .join("\n");
-        console.log(todoList);
+        return todos;
       } catch (error) {
         console.error(error);
       }
@@ -86,10 +93,7 @@ module.exports = (sequelize, DataTypes) => {
             },
           },
         });
-        const todoList = todos
-          .map((todo) => todo.displayableString())
-          .join("\n");
-        console.log(todoList);
+        return todos;
       } catch (error) {
         console.error(error);
       }
@@ -113,7 +117,8 @@ module.exports = (sequelize, DataTypes) => {
 
     displayableString() {
       let checkbox = this.completed ? "[x]" : "[ ]";
-      return `${this.id}. ${checkbox} ${this.title} ${this.dueDate}`;
+      let date = this.dueDate !== today ? this.dueDate : "";
+      return `${this.id}. ${checkbox} ${this.title} ${date}`;
     }
   }
   Todo.init(
